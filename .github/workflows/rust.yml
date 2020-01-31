@@ -1,0 +1,15 @@
+name: manylinux_wheel
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    container:
+      image: docker://konstin2/maturin:master
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: maturin build --release
