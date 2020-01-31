@@ -17,6 +17,7 @@ jobs:
     - name: Upload wheel to release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run:
+      run: |
         python3.6 -m pip install --upgrade pygithub
         python3.6 upload_artifact.py -d target/wheels
+
