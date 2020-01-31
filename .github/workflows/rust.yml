@@ -18,4 +18,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run:
-        python3 upload_artifact.py -d target/wheels
+        python3.6 -m pip install --upgrade pygithub
+        python3.6 upload_artifact.py -d target/wheels
