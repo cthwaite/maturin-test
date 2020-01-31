@@ -1,9 +1,12 @@
 [package]
-name = "rust-actions-test"
-version = "0.1.0"
-authors = ["cthwaite <thwaite@mac.com>"]
+name = "maturin-test"
+version = "0.0.0"
+authors = ["cthwaite"]
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "string_sum"
+crate-type = ["cdylib"]
 
 [dependencies]
+pyo3 = { version = "^0.8", features= ["extension-module"]}
