@@ -28,7 +28,7 @@ def ensure_getenv(var: str) -> str:
     try:
         return os.environ[var]
     except KeyError:
-        raise RuntimeError(f'${var} is not set')
+        raise RuntimeError(f"${var} is not set")
 
 
 def main():
@@ -36,15 +36,15 @@ def main():
     parser.add_argument(
         "-d", "--dist_dir", help="Directory to search for wheels", default="./dist"
     )
-    parser.add_argument('-v', '--verbose', help='Print detailed logs')
+    parser.add_argument("-v", "--verbose", help="Print detailed logs")
     args = parser.parse_args()
 
     github_token = ensure_getenv("GITHUB_TOKEN")
-    repo_name = ensure_getenv('GITHUB_REPOSITORY')
-    tag_ref = ensure_getenv('GITHUB_REF')
-    if not tag_ref.startswith('refs/tags'):
-        raise RuntimeError(f'{tag_ref} does not look like a valid tag, aborting')
-    release_tag = tag_ref.replace('refs/tags/', '')
+    repo_name = ensure_getenv("GITHUB_REPOSITORY")
+    tag_ref = ensure_getenv("GITHUB_REF")
+    if not tag_ref.startswith("refs/tags"):
+        raise RuntimeError(f"{tag_ref} does not look like a valid tag, aborting")
+    release_tag = tag_ref.replace("refs/tags/", "")
 
     api = Github(github_token)
     repo = api.get_repo(repo_name)
@@ -52,9 +52,9 @@ def main():
         release = repo.get_release(release_tag)
     except GithubException as exc:
         if exc.status == 404:
-            log.info('No such release exists: %s')
-            log.info('Creating new release for tag: %s')
-            release = repo.create_git_release(release_tag, release_tag, '')
+            log.info("No such release exists: %s")
+            log.info("Creating new release for tag: %s")
+            release = repo.create_git_release(release_tag, release_tag, "")
         else:
             raise exc
 
